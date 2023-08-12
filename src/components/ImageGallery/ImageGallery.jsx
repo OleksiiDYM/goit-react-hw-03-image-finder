@@ -6,7 +6,6 @@ import Button from 'components/Button';
 import Loader from 'components/Loader';
 import Modal from 'components/Modal';
 import PropTypes from 'prop-types';
-import Error from 'components/Error';
 
 class ImageGallery extends Component {
   state = {
@@ -93,7 +92,7 @@ class ImageGallery extends Component {
         {status !== 'idle' && status !== 'pending' && images.length !== 0 && (
           <Button onLoadMore={this.onLoadMore} />
         )}
-        {status === 'rejected' && <Error />}
+
         {isModalOpen && (
           <Modal largeImage={modalImg} closeModal={this.closeModal} />
         )}
