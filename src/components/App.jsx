@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
-// import fetchImages from '../Services/fetchImages';
-import { fetchImages } from '../Services/fetchImages';
+import fetchImages from '../Services/fetchImages';
+// import { fetchImages } from '../Services/fetchImages';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import Loader from './Loader/Loader';
 import { Button } from './Button/Button';
