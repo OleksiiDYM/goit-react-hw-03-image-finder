@@ -12,7 +12,6 @@ export class App extends Component {
     images: [],
     page: '',
     searchQuery: '',
-
     per_page: 12,
     isLoading: false,
     loadMore: false,
@@ -40,7 +39,6 @@ export class App extends Component {
 
   getImages = async (searchQuery, page) => {
     this.setState({ isLoading: true });
-
     if (!searchQuery) {
       return;
     }
