@@ -11,7 +11,6 @@ export class Searchbar extends Component {
   handleChange = event => {
     const { name, value } = event.currentTarget;
     this.setState({ [name]: value });
-    this.setState({ searchQuery: event.currentTarget.value.toLowerCase() });
   };
 
   handleSubmit = event => {
