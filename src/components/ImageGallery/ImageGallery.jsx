@@ -1,6 +1,5 @@
-import sass from './ImageGallery.module.scss';
-import ImageGalleryItem from 'components/ImageGalleryItem';
-
+import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
+import './ImageGallery.css';
 import PropTypes from 'prop-types';
 
 export const ImageGallery = ({ images, openModal }) => (

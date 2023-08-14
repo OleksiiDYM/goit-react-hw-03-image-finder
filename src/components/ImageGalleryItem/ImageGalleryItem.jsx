@@ -1,4 +1,4 @@
-import sass from './ImageGalleryItem.module.scss';
+import './ImageGalleryItem.css';
 import PropTypes from 'prop-types';
 
 export const ImageGalleryItem = ({ src, alt, largeImageURL, openModal }) => {

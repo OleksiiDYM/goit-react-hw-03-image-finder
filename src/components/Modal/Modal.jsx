@@ -1,6 +1,6 @@
-import sass from './Modal.module.scss';
 import { Component } from 'react';
 import { createPortal } from 'react-dom';
+import './Modal.css';
 import PropTypes from 'prop-types';
 
 const modalRoot = document.querySelector('#modal-root');
