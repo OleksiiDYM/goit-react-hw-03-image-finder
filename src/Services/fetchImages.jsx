@@ -16,9 +16,6 @@ const fetchImages = async (searchQuery, page) => {
     },
   });
 
-
   return response.data;
 };
 export default fetchImages;
-
-

@@ -44,7 +44,6 @@ export class App extends Component {
     }
     try {
       const { hits, totalHits } = await fetchImages(searchQuery, page);
-      console.log(totalHits, hits);
       const normalizedImages = hits.map(
         ({ id, webformatURL, largeImageURL, tags }) => {
           return {
@@ -83,6 +82,7 @@ export class App extends Component {
   closeModal = () => {
     this.setState({
       showModal: false,
+      largeImageURL: null,
     });
   };
 
