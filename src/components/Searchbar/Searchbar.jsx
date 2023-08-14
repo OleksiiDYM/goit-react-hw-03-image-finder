@@ -1,38 +1,48 @@
+import React from 'react';
 import { Component } from 'react';
 import sass from './Searchbar.module.scss';
-import { IoSearchOutline } from 'react-icons/io5';
 import PropTypes from 'prop-types';
 
-class Searchbar extends Component {
+export class Searchbar extends Component {
   state = {
-    value: '',
+    searchQuery: '',
   };
 
-  handleChange = ({ target: { value } }) => {
-    this.setState({ value });
+  handleChange = event => {
+    const { name, value } = event.currentTarget;
+    this.setState({ [name]: value });
+    this.setState({ searchQuery: event.currentTarget.value.toLowerCase() });
+
+    // this.setState({ value });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.onSubmit(this.state.value);
+  handleSubmit = event => {
+    event.preventDefault();
+    if (this.state.searchQuery.trim() === '') {
+      return alert('Please enter, what do you want to see');
+    }
+    console.log(this.state.searchQuery);
+    this.props.onSubmit(this.state.searchQuery);
+    this.setState({ searchQuery: '' });
   };
 
   render() {
     return (
-      <header className={sass.searchbar}>
-        <form className={sass.searchForm} onSubmit={this.handleSubmit}>
-          <button type="submit" className={sass.searchFormButton}>
-            <IoSearchOutline size={30} />
+      <header className="SearchContainer">
+        <form className="SearchForm" onSubmit={this.handleSubmit}>
+          <button className="SearchForm-button" type="submit">
+            <span></span>
           </button>
 
           <input
-            className={sass.searchFormInput}
+            className="SearchForm-input"
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
+            name="searchQuery"
+            value={this.state.searchQuery}
             onChange={this.handleChange}
-            value={this.state.value}
           />
         </form>
       </header>
@@ -43,5 +53,4 @@ class Searchbar extends Component {
 Searchbar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
-
-export default Searchbar;
+// export default Searchbar;

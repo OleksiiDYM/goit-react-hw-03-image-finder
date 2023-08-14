@@ -1,21 +1,17 @@
 import sass from './ImageGalleryItem.module.scss';
 import PropTypes from 'prop-types';
 
-export const ImageGalleryItem = ({ image, tags, showModal }) => {
+export const ImageGalleryItem = ({ src, alt, largeImageURL, openModal }) => {
   return (
-    <li className={sass.imageGalleryItem}>
-      <img
-        src={image}
-        alt={tags}
-        className={sass.imageGalleryItemIMG}
-        onClick={showModal}
-      />
+    <li className="ImageGalleryItem" onClick={() => openModal(largeImageURL)}>
+      <img src={src} alt={alt} className="ImageGalleryItem-big" />
     </li>
   );
 };
 
 ImageGalleryItem.propTypes = {
-  image: PropTypes.string.isRequired,
-  tags: PropTypes.string.isRequired,
-  showModal: PropTypes.func.isRequired,
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  openModal: PropTypes.func.isRequired,
 };

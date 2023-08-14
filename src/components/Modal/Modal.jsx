@@ -1,40 +1,46 @@
 import sass from './Modal.module.scss';
 import { Component } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
-class Modal extends Component {
-  state = { modalImg: this.props.largeImage };
+const modalRoot = document.querySelector('#modal-root');
 
-  onPressESC = ({ code }) => {
-    if (code === 'Escape') {
-      this.props.closeModal(this.state);
-    }
-  };
-
+export class Modal extends Component {
   componentDidMount() {
-    window.addEventListener('keydown', this.onPressESC);
+    window.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.onPressESC);
+    window.removeEventListener('keydown', this.handleKeyDown);
   }
 
-  render() {
-    const { closeModal, largeImage, tags } = this.props;
+  handleKeyDown = event => {
+    const codeKey = event.code;
+    console.log(codeKey);
+    if (event.code === 'Escape') {
+      this.props.onClose();
+    }
+  };
 
-    return (
-      <div className={sass.overlay} onClick={closeModal}>
-        <div className={sass.modal}>
-          <img src={largeImage} alt={tags} />
+  handleBackDropClick = event => {
+    if (event.currentTarget === event.target) {
+      this.props.onClose();
+    }
+  };
+
+  render() {
+    return createPortal(
+      <div className="Overlay" onClick={this.handleBackDropClick}>
+        <div className="Modal">
+          <img src={this.props.largeImageURL} alt={this.props.tags} />
         </div>
-      </div>
+      </div>,
+      modalRoot
     );
   }
 }
 
 Modal.propTypes = {
-  closeModal: PropTypes.func.isRequired,
-  largeImage: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  largeImageUrl: PropTypes.string,
 };
-
-export default Modal;
