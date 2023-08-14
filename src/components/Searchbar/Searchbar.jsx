@@ -12,16 +12,13 @@ export class Searchbar extends Component {
     const { name, value } = event.currentTarget;
     this.setState({ [name]: value });
     this.setState({ searchQuery: event.currentTarget.value.toLowerCase() });
-
-    // this.setState({ value });
   };
 
   handleSubmit = event => {
     event.preventDefault();
     if (this.state.searchQuery.trim() === '') {
-      return alert('Please enter, what do you want to see');
+      return alert('What are you searching for?');
     }
-    console.log(this.state.searchQuery);
     this.props.onSubmit(this.state.searchQuery);
     this.setState({ searchQuery: '' });
   };
@@ -33,7 +30,6 @@ export class Searchbar extends Component {
           <button className="SearchForm-button" type="submit">
             <span></span>
           </button>
-
           <input
             className="SearchForm-input"
             type="text"
@@ -53,4 +49,3 @@ export class Searchbar extends Component {
 Searchbar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
-// export default Searchbar;

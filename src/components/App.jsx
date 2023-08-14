@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
 import fetchImages from '../Services/fetchImages';
-// import { fetchImages } from '../Services/fetchImages';
+
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import Loader from './Loader/Loader';
 import { Button } from './Button/Button';
@@ -23,18 +23,10 @@ export class App extends Component {
   };
 
   componentDidUpdate(_, prevState) {
-    // console.log(prevState.page);
-    // console.log(this.state.page);
     const { searchQuery, page } = this.state;
     if (prevState.searchQuery !== searchQuery || prevState.page !== page) {
       this.getImages(searchQuery, page);
     }
-    // if (this.state.page > 1) {
-    //   window.scrollTo({
-    //     top: document.documentElement.scrollHeight,
-    //     behavior: 'smooth',
-    //   });
-    // }
   }
 
   formSubmit = searchQuery => {
@@ -44,7 +36,6 @@ export class App extends Component {
       page: 1,
       loadMore: false,
     });
-    console.log(searchQuery);
   };
 
   getImages = async (searchQuery, page) => {
@@ -68,7 +59,7 @@ export class App extends Component {
       );
 
       if (totalHits === 0) {
-        alert('Sorry, we do not find images');
+        alert('Oops! We have no images');
       }
       this.setState(prevState => ({
         images: [...prevState.images, ...normalizedImages],
@@ -89,7 +80,6 @@ export class App extends Component {
       showModal: true,
       largeImageURL: largeImageURL,
     });
-    console.log(largeImageURL);
   };
 
   closeModal = () => {
@@ -99,22 +89,15 @@ export class App extends Component {
   };
 
   render() {
-    // паттерн деструктуризации пропсов state
     const { images, isLoading, loadMore, page, showModal, largeImageURL } =
       this.state;
 
     return (
       <div>
         <Searchbar onSubmit={this.formSubmit} />
-        {/* {isLoading ? (
-          <Loader />
-        ) : (
-          <ImageGallery images={images} openModal={this.openModal} />
-        )} */}
         <Loader isLoading={isLoading} />
         <ImageGallery images={images} openModal={this.openModal} />
         {loadMore && <Button onloadMore={this.onloadMore} page={page} />}
-        {/* портал для модалки в index.html */}
         {showModal && (
           <Modal largeImageURL={largeImageURL} onClose={this.closeModal} />
         )}
@@ -122,19 +105,3 @@ export class App extends Component {
     );
   }
 }
-
-//   return (
-//     <div
-//       style={{
-//         height: '100vh',
-//         display: 'flex',
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         fontSize: 40,
-//         color: '#010101',
-//       }}
-//     >
-//       React homework template
-//     </div>
-//   );
-// };
